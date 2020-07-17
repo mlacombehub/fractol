@@ -6,17 +6,15 @@
 /*   By: mlacombe <mlacombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:27:18 by mlacombe          #+#    #+#             */
-/*   Updated: 2020/05/29 16:21:58 by mlacombe         ###   ########.fr       */
+/*   Updated: 2020/07/16 09:22:12 by mlacombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEYMAP_H
 # define KEYMAP_H
 
-#define KEY_EXT		0x0100		/* Normal function keys	*/
-#define KEY_CTRL	0x0200		/* Control key			*/
-#define KEY_SHIFT	0x0400		/* Shift key			*/
-#define KEY_ALT		0x0800		/* Alternate key		*/
+#define KEY_CTRL	256
+#define KEY_SHIFT	257
 
 /* Alphanumeric keys*/
 #define KEY_Q 12
@@ -45,16 +43,16 @@
 #define KEY_B 11
 #define KEY_N 45
 #define KEY_M 46
-#define KEY_N1 83
-#define KEY_N2 84
-#define KEY_N3 85
-#define KEY_N4 86
-#define KEY_N5 87
-#define KEY_N6 88
-#define KEY_N7 89
-#define KEY_N8 90
-#define KEY_N9 91
-#define KEY_N0 92
+#define KEY_N1 18
+#define KEY_N2 19
+#define KEY_N3 20
+#define KEY_N4 21
+#define KEY_N5 22
+#define KEY_N6 23
+#define KEY_N7 24
+#define KEY_N8 25
+#define KEY_N9 26
+#define KEY_N0 27
 
 #define KEY_LEFT 123
 #define KEY_RIGHT 124

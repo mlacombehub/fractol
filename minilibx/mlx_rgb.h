@@ -3,6 +3,18 @@
 ** the XFree86 distribution.
 */
 
+typedef struct	s_xpm_col
+{
+	int	name;
+	int	col;
+}				t_xpm_col;
+
+struct	s_col_name
+{
+	char	*name;
+	int		color;
+	int		alignment;
+};
 
 struct s_col_name mlx_col_name[] =
 {

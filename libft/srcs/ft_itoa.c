@@ -6,7 +6,7 @@
 /*   By: mlacombe <mlacombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 14:28:30 by mlacombe          #+#    #+#             */
-/*   Updated: 2019/02/26 18:37:47 by mlacombe         ###   ########.fr       */
+/*   Updated: 2020/07/16 09:59:07 by mlacombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,28 @@ char		*ft_itoa(int n)
 		tmp_n /= 10;
 	}
 	return (dst);
+}
+
+char		*ft_itoa_base(int value, int base)
+{
+	static char	rep[16];
+	static char	buf[66];
+	char		*ptr;
+	int			num;
+
+	ft_memcpy(rep, "0123456789ABCDEF", 16);
+	ptr = &buf[65];
+	*ptr = '\0';
+	num = value;
+	if (base < 2 || base > 16)
+		return (NULL);
+	(value < 0) ? value *= -1 : 42;
+	(value == 0) ? (*--ptr = rep[value % base]) : 42;
+	while (value != 0)
+	{
+		*--ptr = rep[value % base];
+		value /= base;
+	}
+	(num < 0 && base == 10) ? (*--ptr = '-') : 42;
+	return (ptr);
 }

@@ -1,27 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   burningship.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlacombe <mlacombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/25 11:13:01 by mlacombe          #+#    #+#             */
-/*   Updated: 2020/07/15 19:21:55 by mlacombe         ###   ########.fr       */
+/*   Created: 2020/07/15 15:05:27 by mlacombe          #+#    #+#             */
+/*   Updated: 2020/07/15 19:19:46 by mlacombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	fol_mandelbrot_init(t_fol_t *fol)
+void	fol_burningship_init(t_fol_t *fol)
 {
-	fol->f_type = 1;
+	fol->f_type = 3;
 	fol->fractal.color = 0x00FFFFFF;
 	fol->fractal.i_max = 40;
-	fol->fractal.zoom = 300;
-	fol->fractal.set.p1 = (t_vec2_t){-2.5, -1.7};
+	fol->fractal.zoom = 280;
+	fol->fractal.set.p1 = (t_vec2_t){-2.2, -2.1};
 }
 
-void	*fol_mandelbrot(void *tab)
+void	fol_burningship_calc(t_fol_t *fol, t_set_t set)
+{
+	double	tmp;
+
+	fol->fractal.i = 0;
+	while (sqrt(set.z.r * set.z.r + set.z.i * set.z.i) < 4
+				&& fol->fractal.i < fol->fractal.i_max)
+	{
+		tmp = set.z.r;
+		set.z.r = set.z.r * set.z.r - set.z.i * set.z.i + set.c.r;
+		set.z.i = fabs(2 * tmp * set.z.i) + set.c.i;
+		fol->fractal.i++;
+	}
+	if (fol->fractal.i == fol->fractal.i_max)
+		fol_putpixel(fol, fol->fractal.offset, 0);
+	else
+	{
+		fol->fractal.i -= log(log(sqrt(set.z.r * set.z.r + set.z.i * set.z.i)))
+							/ log(2);
+		fol->fractal.i = ((NB_COLOR - 1) * fol->fractal.i) / fol->fractal.i_max;
+		fol_putpixel(fol, fol->fractal.offset,
+						fol->fractal.color * fol->fractal.i);
+	}
+}
+
+void	*fol_burningship(void *tab)
 {
 	t_fol_t		*fol;
 	int			i;
@@ -35,12 +60,12 @@ void	*fol_mandelbrot(void *tab)
 		while (fol->fractal.offset.y < fol->fractal.y_max)
 		{
 			fol->fractal.set.c.r = fol->fractal.offset.x / fol->fractal.zoom
-					+ fol->fractal.set.p1.x;
+									+ fol->fractal.set.p1.x;
 			fol->fractal.set.c.i = fol->fractal.offset.y / fol->fractal.zoom
-					+ fol->fractal.set.p1.y;
+									+ fol->fractal.set.p1.y;
 			fol->fractal.set.z.r = 0;
 			fol->fractal.set.z.i = 0;
-			fol_calc(fol, fol->fractal.set);
+			fol_burningship_calc(fol, fol->fractal.set);
 			fol->fractal.offset.y++;
 		}
 		fol->fractal.offset.x++;

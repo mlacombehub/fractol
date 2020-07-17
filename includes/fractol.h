@@ -6,7 +6,7 @@
 /*   By: mlacombe <mlacombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:32:38 by mlacombe          #+#    #+#             */
-/*   Updated: 2020/07/09 17:56:33 by mlacombe         ###   ########.fr       */
+/*   Updated: 2020/07/16 09:44:27 by mlacombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@
 
 # include <stdio.h>
 
-#define WIN 1000
 #define WIN_X 1000
 #define WIN_Y 1000
-#define NB_COLOR 265
+#define NB_COLOR 0x0000FF
 #define W_THREAD 5
-#define I_THREAD 200
 
 typedef struct s_mlx
 {
@@ -57,18 +55,18 @@ typedef struct	s_set
 	t_vec2_t	p1;
 	t_cmplx_t	z;
 	t_cmplx_t	c;
+	t_cmplx_t	new_c;
 }				t_set_t;
 
 typedef struct	s_fractal
 {
 	t_set_t		set;
-	int			julia_mouse;
 	t_point_t	offset;
-	double		zoom;
-	int			color;
-	int			i;
-	int			i_max;
-	int			y_max;
+	long double	zoom;
+	uint32_t	color;
+	uint32_t	i;
+	uint32_t	i_max;
+	int32_t		y_max;
 }				t_fractal_t;
 
 typedef struct	s_fol
@@ -76,15 +74,23 @@ typedef struct	s_fol
 	char		*progname;
 	t_mlx_t		mlx;
 	t_fractal_t	fractal;
+	char		*RGB_c;
+	char		tom_hook;
 	char		f_type;
 }				t_fol_t;
 
-int		mouse_hook(int mousecode, t_point_t p, t_fol_t *fol);
+int		hook(int keycode, t_fol_t *fol);
+int		mouse_hook(int mousecode, int x, int y, t_fol_t *fol);
 int		key_hook(int keycode, t_fol_t *fol);
-void	fol_calc(t_fol_t *fol);
-void	fol_init_mandelbrot(t_fol_t *fol);
-void	fol_mandelbrot_calc(t_fol_t *fol, t_set_t set);
-void	fol_mandelbrot_thread(t_fol_t *fol);
+void	fol_select(t_fol_t *fol);
+void	fol_mandelbrot_init(t_fol_t *fol);
+void	*fol_mandelbrot(void *tab);
+void	fol_julia_init(t_fol_t *fol);
+void	*fol_julia(void *tab);
+void	fol_burningship_init(t_fol_t *fol);
+void	*fol_burningship(void *tab);
+void	fol_putpixel(t_fol_t *fol, t_point_t point, uint32_t color);
+void	fol_calc(t_fol_t *fol, t_set_t set);
 void	fol_mlx_crea(t_fol_t *fol);
 int		close_screen(void *param);
 

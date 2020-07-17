@@ -6,7 +6,7 @@
 /*   By: mlacombe <mlacombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:37:37 by mlacombe          #+#    #+#             */
-/*   Updated: 2020/02/25 14:17:49 by mlacombe         ###   ########.fr       */
+/*   Updated: 2020/07/16 09:37:49 by mlacombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,7 @@ size_t			ft_word_count(const char *s, char c);
 size_t			ft_word_len(const char *s, char c);
 double			ft_atod(const char *str);
 int				ft_open_close_fd(char *doc);
+char			*ft_itoa_base(int value, int base);
+
 
 #endif

@@ -6,7 +6,7 @@
 #    By: mlacombe <mlacombe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/25 15:14:53 by mlacombe          #+#    #+#              #
-#    Updated: 2020/07/08 18:18:26 by mlacombe         ###   ########.fr        #
+#    Updated: 2020/07/15 15:18:33 by mlacombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ DEP				=$(addprefix $(OBJ_DIR),$(SRC:.c=.d))
 # files
 SRC				=main.c				\
 				fol_mlx.c			\
-				mandelbrot.c
+				mandelbrot.c		\
+				julia.c				\
+				burningship.c
 
 # directories
 SRC_DIR			=./srcs/
@@ -67,7 +69,7 @@ clean:
 
 fclean:
 	$(MAKE) -C $(FT) fclean
-	$(MAKE) -C $(MLX) fclean
+	$(MAKE) -C $(MLX) clean
 	rm -rf $(OBJ_DIR) $(NAME)
 
 re:
