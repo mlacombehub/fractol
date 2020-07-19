@@ -6,7 +6,7 @@
 /*   By: mlacombe <mlacombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:32:38 by mlacombe          #+#    #+#             */
-/*   Updated: 2020/07/16 09:44:27 by mlacombe         ###   ########.fr       */
+/*   Updated: 2020/07/19 18:22:09 by mlacombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 
 # include <stdio.h>
 
-#define WIN_X 1000
-#define WIN_Y 1000
-#define NB_COLOR 0x0000FF
-#define W_THREAD 5
+# define WIN_X 1000
+# define WIN_Y 1000
+# define NB_COLOR 0x0000FF
+# define W_THREAD 5
 
-typedef struct s_mlx
+typedef struct	s_mlx
 {
 	void		*mlx;
 	void		*win;
@@ -36,6 +36,7 @@ typedef struct s_mlx
 	int32_t		bits_per_pixel;
 	int32_t		endian;
 	int32_t		line_size;
+	char		alignment[4];
 }				t_mlx_t;
 
 typedef struct	s_vec2
@@ -62,7 +63,7 @@ typedef struct	s_fractal
 {
 	t_set_t		set;
 	t_point_t	offset;
-	long double	zoom;
+	double		zoom;
 	uint32_t	color;
 	uint32_t	i;
 	uint32_t	i_max;
@@ -71,27 +72,29 @@ typedef struct	s_fractal
 
 typedef struct	s_fol
 {
-	char		*progname;
-	t_mlx_t		mlx;
 	t_fractal_t	fractal;
-	char		*RGB_c;
+	t_mlx_t		mlx;
+	char		*progname;
 	char		tom_hook;
 	char		f_type;
+	char		julia;
+	char		alignment[5];
 }				t_fol_t;
 
-int		hook(int keycode, t_fol_t *fol);
-int		mouse_hook(int mousecode, int x, int y, t_fol_t *fol);
-int		key_hook(int keycode, t_fol_t *fol);
-void	fol_select(t_fol_t *fol);
-void	fol_mandelbrot_init(t_fol_t *fol);
-void	*fol_mandelbrot(void *tab);
-void	fol_julia_init(t_fol_t *fol);
-void	*fol_julia(void *tab);
-void	fol_burningship_init(t_fol_t *fol);
-void	*fol_burningship(void *tab);
-void	fol_putpixel(t_fol_t *fol, t_point_t point, uint32_t color);
-void	fol_calc(t_fol_t *fol, t_set_t set);
-void	fol_mlx_crea(t_fol_t *fol);
-int		close_screen(void *param);
+int				hook(int keycode, t_fol_t *fol);
+int				mouse_hook(int mousecode, int x, int y, t_fol_t *fol);
+int				key_hook(int keycode, t_fol_t *fol);
+void			fol_select(t_fol_t *fol);
+void			fol_mandelbrot_init(t_fol_t *fol);
+void			*fol_mandelbrot(void *tab);
+void			fol_julia_init(t_fol_t *fol);
+void			*fol_julia(void *tab);
+void			fol_burningship_init(t_fol_t *fol);
+void			*fol_burningship(void *tab);
+void			fol_putpixel(t_fol_t *fol, t_point_t point, uint32_t color);
+void			fol_calc(t_fol_t *fol, t_set_t set);
+int				mouse_julia(int x, int y, t_fol_t *fol);
+void			fol_mlx_crea(t_fol_t *fol);
+int				close_screen(void *param);
 
 #endif

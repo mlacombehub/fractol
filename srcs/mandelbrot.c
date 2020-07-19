@@ -6,7 +6,7 @@
 /*   By: mlacombe <mlacombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 11:13:01 by mlacombe          #+#    #+#             */
-/*   Updated: 2020/07/15 19:21:55 by mlacombe         ###   ########.fr       */
+/*   Updated: 2020/07/19 18:45:33 by mlacombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	fol_mandelbrot_init(t_fol_t *fol)
 {
 	fol->f_type = 1;
-	fol->fractal.color = 0x00FFFFFF;
+	fol->fractal.color = 0x00A0A0A0;
 	fol->fractal.i_max = 40;
 	fol->fractal.zoom = 300;
 	fol->fractal.set.p1 = (t_vec2_t){-2.5, -1.7};

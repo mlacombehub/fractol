@@ -6,7 +6,7 @@
 #    By: mlacombe <mlacombe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/25 15:14:53 by mlacombe          #+#    #+#              #
-#    Updated: 2020/07/15 15:18:33 by mlacombe         ###   ########.fr        #
+#    Updated: 2020/07/17 12:43:02 by mlacombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ clean:
 
 fclean:
 	$(MAKE) -C $(FT) fclean
-	$(MAKE) -C $(MLX) clean
+	$(MAKE) -C $(MLX) fclean
 	rm -rf $(OBJ_DIR) $(NAME)
 
 re:

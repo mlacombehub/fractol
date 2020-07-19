@@ -6,7 +6,7 @@
 /*   By: mlacombe <mlacombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 18:51:28 by mlacombe          #+#    #+#             */
-/*   Updated: 2020/07/15 19:19:46 by mlacombe         ###   ########.fr       */
+/*   Updated: 2020/07/19 18:29:27 by mlacombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,22 @@
 void	fol_julia_init(t_fol_t *fol)
 {
 	fol->f_type = 2;
-	fol->fractal.color = 0x00FFFFFF;
+	fol->fractal.color = 0x00A0A0A0;
 	fol->fractal.i_max = 40;
 	fol->fractal.zoom = 300;
 	fol->fractal.set.p1 = (t_vec2_t){-1.7, -1.5};
 	fol->fractal.set.new_c = (t_cmplx_t){M_PI, M_PI};
+}
+
+int		mouse_julia(int x, int y, t_fol_t *fol)
+{
+	if (fol->f_type == 2 && fol->julia == 0)
+	{
+		fol->fractal.set.new_c.r = (double)(x - WIN_X / 2) / fol->fractal.zoom;
+		fol->fractal.set.new_c.i = (double)(y - WIN_Y / 2) / fol->fractal.zoom;
+	}
+	fol_select(fol);
+	return (0);
 }
 
 void	*fol_julia(void *tab)

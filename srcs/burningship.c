@@ -6,7 +6,7 @@
 /*   By: mlacombe <mlacombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 15:05:27 by mlacombe          #+#    #+#             */
-/*   Updated: 2020/07/15 19:19:46 by mlacombe         ###   ########.fr       */
+/*   Updated: 2020/07/19 18:29:39 by mlacombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	fol_burningship_init(t_fol_t *fol)
 {
 	fol->f_type = 3;
-	fol->fractal.color = 0x00FFFFFF;
+	fol->fractal.color = 0x00A0A0A0;
 	fol->fractal.i_max = 40;
 	fol->fractal.zoom = 280;
 	fol->fractal.set.p1 = (t_vec2_t){-2.2, -2.1};
@@ -23,24 +23,26 @@ void	fol_burningship_init(t_fol_t *fol)
 
 void	fol_burningship_calc(t_fol_t *fol, t_set_t set)
 {
-	double	tmp;
+	t_cmplx_t	pow_z;
+	double		tmp;
 
 	fol->fractal.i = 0;
-	while (sqrt(set.z.r * set.z.r + set.z.i * set.z.i) < 4
-				&& fol->fractal.i < fol->fractal.i_max)
+	pow_z = (t_cmplx_t){set.z.r * set.z.r, set.z.i * set.z.i};
+	while (sqrt(pow_z.r + pow_z.i) < 4 && fol->fractal.i < fol->fractal.i_max)
 	{
 		tmp = set.z.r;
-		set.z.r = set.z.r * set.z.r - set.z.i * set.z.i + set.c.r;
+		set.z.r = pow_z.r - pow_z.i + set.c.r;
 		set.z.i = fabs(2 * tmp * set.z.i) + set.c.i;
+		pow_z = (t_cmplx_t){set.z.r * set.z.r, set.z.i * set.z.i};
 		fol->fractal.i++;
 	}
 	if (fol->fractal.i == fol->fractal.i_max)
 		fol_putpixel(fol, fol->fractal.offset, 0);
 	else
 	{
-		fol->fractal.i -= log(log(sqrt(set.z.r * set.z.r + set.z.i * set.z.i)))
-							/ log(2);
-		fol->fractal.i = ((NB_COLOR - 1) * fol->fractal.i) / fol->fractal.i_max;
+		fol->fractal.i -= log(log(sqrt(pow_z.r + pow_z.i))) / log(2);
+		fol->fractal.i = ((NB_COLOR - 1) * fol->fractal.i)
+						/ fol->fractal.i_max;
 		fol_putpixel(fol, fol->fractal.offset,
 						fol->fractal.color * fol->fractal.i);
 	}

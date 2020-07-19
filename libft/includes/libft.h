@@ -6,14 +6,14 @@
 /*   By: mlacombe <mlacombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:37:37 by mlacombe          #+#    #+#             */
-/*   Updated: 2020/07/16 09:37:49 by mlacombe         ###   ########.fr       */
+/*   Updated: 2020/07/19 15:04:04 by mlacombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define TRUE (1)
-# define FALSE (0)
+# define TRUE 1
+# define FALSE 0
 
 # include <unistd.h>
 # include <stdint.h>
@@ -31,7 +31,6 @@ typedef struct	s_point
 	int32_t		x;
 	int32_t		y;
 }				t_point_t;
-
 
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
@@ -120,6 +119,6 @@ size_t			ft_word_len(const char *s, char c);
 double			ft_atod(const char *str);
 int				ft_open_close_fd(char *doc);
 char			*ft_itoa_base(int value, int base);
-
+char			*ft_memcpy_nton(char *dst, char *src, size_t n, size_t size);
 
 #endif

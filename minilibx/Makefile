@@ -1,25 +1,24 @@
-#
-#
+##
+## Makefile for MiniLibX in /home/boulon/work/c/raytraceur/minilibx
+## 
+## Made by Olivier Crouzet
+## Login   <ol@epitech.net>
+## 
+## Started on  Tue Oct  5 15:56:43 2004 Olivier Crouzet
+## Last update Tue May 15 15:44:41 2007 Olivier Crouzet
+##
 
-NOM=libmlx.a
-SRC= mlx_shaders.c mlx_new_window.m mlx_init_loop.m mlx_new_image.m mlx_xpm.c mlx_int_str_to_wordtab.c
-OBJ1=$(SRC:.c=.o)
-OBJ=$(OBJ1:.m=.o)
-override CFLAGS+=-Ofast -Wno-deprecated-declarations
+## Please use configure script
 
-all:
-	$(MAKE) -j $(NOM)
 
-$(NOM):	$(OBJ)
-	ar -r $(NOM) $(OBJ)
-	ranlib $(NOM)
+all	: do_configure
 
-clean:
-	rm -f $(OBJ) *~
-	rm -f mlx_app
+do_configure	:
+	./configure
 
-fclean: clean
-	rm -f $(NOM)
+clean	:
+	./configure clean
 
-re: fclean
-	$(MAKE) all
+fclean : clean
+
+re	: clean all

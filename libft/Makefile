@@ -6,7 +6,7 @@
 #    By: mlacombe <mlacombe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 16:32:14 by mlacombe          #+#    #+#              #
-#    Updated: 2020/02/25 12:55:13 by mlacombe         ###   ########.fr        #
+#    Updated: 2020/07/19 13:29:12 by mlacombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,6 +99,7 @@ SRC =	ft_bzero.c\
 		ft_free_return.c\
 		ft_atod.c\
 		ft_open_close_fd.c\
+		ft_memcpy_nton.c\
 
 SRC_DIR = srcs/
 OBJ_DIR = objects/
